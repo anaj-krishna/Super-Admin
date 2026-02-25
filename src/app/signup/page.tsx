@@ -3,16 +3,11 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  void children;
+export default function SignupRedirectPage() {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace("/superadmin");
+    router.replace("/superadmin/signup");
   }, [router]);
 
   return null;
