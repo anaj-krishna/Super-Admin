@@ -1,3 +1,4 @@
+// This file contains TypeScript type definitions for the Super Admin dashboard application.
 export type ManagedRole = "ADMIN" | "DELIVERY";
 export type AccountStatus = "PENDING" | "ACTIVE" | "REJECTED";
 
