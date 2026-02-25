@@ -1,5 +1,5 @@
 "use client";
-
+// This file contains the React component for the "Available Jobs" page in the Super Admin dashboard application, which displays the delivery orders that are ready to be accepted by a specific delivery
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";

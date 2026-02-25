@@ -1,3 +1,4 @@
+// This file contains TypeScript type definitions for the authentication-related data structures used in the Super Admin dashboard application.
 export interface LoginResponse {
   id: string;
   email: string;

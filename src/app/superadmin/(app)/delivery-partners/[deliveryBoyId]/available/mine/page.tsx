@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/set-state-in-effect */
+// This file contains the React component for the "My Jobs" page in the Super Admin dashboard application, which displays the delivery orders assigned to a specific delivery partner (delivery
 "use client";
 
 import Link from "next/link";
