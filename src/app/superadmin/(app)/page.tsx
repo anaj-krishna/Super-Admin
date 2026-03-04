@@ -20,8 +20,23 @@ export default function SuperAdminProfilePage() {
 
   if (loading) {
     return (
-      <div className="p-8">
-        <p className="text-zinc-600 dark:text-zinc-400">Loading profile...</p>
+      <div className="p-8 max-w-3xl animate-pulse">
+        {/* Title and Subtitle Skeletons */}
+        <div className="h-8 bg-zinc-200 dark:bg-zinc-700 rounded w-1/4 mb-3"></div>
+        <div className="h-4 bg-zinc-200 dark:bg-zinc-700 rounded w-1/3 mb-8"></div>
+
+        {/* Card Layout Skeleton */}
+        <div className="bg-white dark:bg-zinc-800 rounded-lg p-6 border border-zinc-200 dark:border-zinc-700">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Generate 10 blank placeholder items to match your Info fields */}
+            {Array.from({ length: 10 }).map((_, i) => (
+              <div key={i}>
+                <div className="h-3 bg-zinc-200 dark:bg-zinc-700 rounded w-16 mb-2"></div>
+                <div className="h-5 bg-zinc-200 dark:bg-zinc-700 rounded w-40"></div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }

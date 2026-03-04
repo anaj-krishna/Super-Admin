@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
 import Link from "next/link";
@@ -26,43 +25,68 @@ export default function DeliveryPartnersPage() {
     load();
   }, []);
 
+  const getStatusBadgeStyles = (status?: string) => {
+    switch (status?.toLowerCase()) {
+      case "active":
+        return "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 border-green-200 dark:border-green-800/30";
+      case "inactive":
+      case "suspended":
+        return "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 border-red-200 dark:border-red-800/30";
+      default:
+        return "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700";
+    }
+  };
+
   return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
+    <div className="p-4 sm:p-8 max-w-7xl mx-auto">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-bold text-zinc-900 dark:text-white">Delivery Partners</h1>
           <p className="text-zinc-600 dark:text-zinc-400 mt-1">Manage all delivery partners linked to this super admin</p>
         </div>
         <Link
           href="/superadmin/delivery-partners/create"
-          className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors"
+          className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold shadow-lg shadow-purple-500/20 active:scale-95 transition-all text-center shrink-0"
         >
           + Add Delivery Partner
         </Link>
       </div>
 
       {loading ? (
-        <div className="text-center py-12">
-          <p className="text-zinc-600 dark:text-zinc-400">Loading...</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="bg-zinc-50 dark:bg-zinc-800/50 rounded-xl p-6 border border-zinc-200 dark:border-zinc-700 animate-pulse">
+              <div className="flex items-start justify-between mb-4">
+                <div className="h-6 bg-zinc-200 dark:bg-zinc-700 rounded w-1/2"></div>
+                <div className="h-5 bg-zinc-200 dark:bg-zinc-700 rounded-full w-16"></div>
+              </div>
+              <div className="h-4 bg-zinc-200 dark:bg-zinc-700 rounded w-3/4 mb-4"></div>
+              <div className="h-3 bg-zinc-200 dark:bg-zinc-700 rounded w-1/3 mt-6"></div>
+            </div>
+          ))}
         </div>
       ) : error ? (
-        <div className="bg-red-50 dark:bg-red-900 rounded-lg p-6 border border-red-200 dark:border-red-700 text-center">
-          <p className="text-red-700 dark:text-red-100">{error}</p>
+        <div className="bg-red-50 dark:bg-red-900/20 rounded-xl p-6 border border-red-200 dark:border-red-800/30 text-center">
+          <p className="text-red-700 dark:text-red-400 mb-4">{error}</p>
           <button
             onClick={load}
-            className="mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded"
+            className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
           >
-            Retry
+            Retry Loading
           </button>
         </div>
       ) : list.length === 0 ? (
-        <div className="bg-white dark:bg-zinc-800 rounded-lg p-12 border border-zinc-200 dark:border-zinc-700 text-center">
-          <p className="text-zinc-600 dark:text-zinc-400 text-lg">No delivery partners yet</p>
+        <div className="bg-white dark:bg-zinc-900 rounded-xl p-12 border border-zinc-200 dark:border-zinc-800 text-center flex flex-col items-center">
+          <div className="w-16 h-16 bg-purple-50 dark:bg-purple-900/20 rounded-full flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400">
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
+          </div>
+          <p className="text-zinc-900 dark:text-white font-semibold text-lg">No delivery partners found</p>
+          <p className="text-zinc-500 dark:text-zinc-400 mt-1 max-w-sm">Get started by adding your first delivery partner to handle orders.</p>
           <Link
             href="/superadmin/delivery-partners/create"
-            className="inline-block mt-4 px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors"
+            className="mt-6 px-6 py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors"
           >
-            Create your first delivery partner
+            Add Delivery Partner
           </Link>
         </div>
       ) : (
@@ -71,16 +95,24 @@ export default function DeliveryPartnersPage() {
             <Link
               key={u._id}
               href={`/superadmin/delivery-partners/${u._id}`}
-              className="bg-white dark:bg-zinc-800 rounded-lg p-6 border border-zinc-200 dark:border-zinc-700 hover:shadow-lg transition-shadow"
+              className="group bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-800/50 dark:hover:bg-zinc-800 rounded-xl p-6 border border-zinc-200 dark:border-zinc-700 hover:border-purple-500/50 dark:hover:border-purple-500/50 hover:shadow-xl hover:shadow-purple-500/5 transition-all"
             >
               <div className="flex items-start justify-between mb-3">
-                <h3 className="text-lg font-semibold text-zinc-900 dark:text-white">{u.name}</h3>
-                <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-100 text-xs font-medium rounded-full">
-                  {u.status}
+                <h3 className="text-lg font-bold text-zinc-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                  {u.name}
+                </h3>
+                <span className={`px-2.5 py-1 text-[10px] uppercase tracking-wider font-bold rounded-full border ${getStatusBadgeStyles(u.status)}`}>
+                  {u.status || "Unknown"}
                 </span>
               </div>
-              <p className="text-zinc-600 dark:text-zinc-400 text-sm">{u.email}</p>
-              <p className="text-zinc-500 dark:text-zinc-400 text-xs mt-3">ID: {u._id.slice(0, 8)}...</p>
+              <p className="text-zinc-500 dark:text-zinc-400 text-sm flex items-center gap-2">
+                <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                {u.email}
+              </p>
+              <div className="mt-6 pt-4 border-t border-zinc-200 dark:border-zinc-700 flex justify-between items-center text-xs text-zinc-400 dark:text-zinc-500">
+                <span>ID: {u._id.slice(0, 8)}...</span>
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity text-purple-600 dark:text-purple-400 font-medium">View details &rarr;</span>
+              </div>
             </Link>
           ))}
         </div>
