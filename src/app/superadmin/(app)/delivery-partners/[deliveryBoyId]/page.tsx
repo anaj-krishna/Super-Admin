@@ -150,7 +150,7 @@ export default function DeliveryPartnerDetailPage() {
           <svg className="w-6 h-6 text-zinc-400 dark:text-zinc-600 group-hover:text-purple-500 transition-colors transform group-hover:translate-x-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
         </Link>
 
-        <Link
+        {/* <Link
           href={`/superadmin/delivery-partners/${user._id}/mine`}
           className="group relative overflow-hidden bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-800/50 dark:hover:bg-zinc-800 p-6 md:p-8 border border-zinc-200 dark:border-zinc-700 rounded-2xl hover:border-orange-500/50 dark:hover:border-orange-500/50 hover:shadow-xl hover:shadow-orange-500/10 transition-all flex items-center justify-between"
         >
@@ -162,7 +162,7 @@ export default function DeliveryPartnerDetailPage() {
             <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Manage accepted, picked up, and delivered orders.</p>
           </div>
           <svg className="w-6 h-6 text-zinc-400 dark:text-zinc-600 group-hover:text-orange-500 transition-colors transform group-hover:translate-x-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" /></svg>
-        </Link>
+        </Link> */}
 
       </div>
     </div>
