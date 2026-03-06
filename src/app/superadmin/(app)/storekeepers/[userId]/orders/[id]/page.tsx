@@ -156,6 +156,15 @@ export default function StorekeeperOrderDetailPage() {
 
       <div className="mt-6 bg-white dark:bg-zinc-800 rounded-lg p-6 border border-zinc-200 dark:border-zinc-700">
         <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">Totals</h2>
+        {typeof order.itemsTotal === "number" && (
+          <div className="mt-2 text-sm text-zinc-700 dark:text-zinc-300">Items total: {order.itemsTotal}</div>
+        )}
+        {typeof order.deliveryCharge === "number" && (
+          <div className="mt-2 text-sm text-zinc-700 dark:text-zinc-300">Delivery charge: {order.deliveryCharge}</div>
+        )}
+        {typeof order.deliveryChargePincode === "string" && order.deliveryChargePincode.trim() !== "" && (
+          <div className="mt-2 text-sm text-zinc-700 dark:text-zinc-300">Charge pincode: {order.deliveryChargePincode}</div>
+        )}
         <div className="mt-2 text-sm text-zinc-700 dark:text-zinc-300">Total amount: {order.totalAmount}</div>
       </div>
     </div>

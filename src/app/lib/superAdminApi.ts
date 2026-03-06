@@ -2,6 +2,9 @@ import api from "./api";
 import type {
   CreateManagedUserRequest,
   CreateManagedUserResponse,
+  DeliveryChargeDeleteResponse,
+  DeliveryChargeRule,
+  DeliveryChargeUpsertRequest,
   LoginRequest,
   LoginResponse,
   ManagedUser,
@@ -162,5 +165,20 @@ export const superAdminApi = {
   failOrder: (deliveryBoyId: string, id: string) =>
     api
       .post<Order>(`${BASE}/delivery-boys/${deliveryBoyId}/orders/${id}/fail`)
+      .then((r) => r.data),
+
+  // Delivery charges (pincode)
+  listDeliveryCharges: () =>
+    api.get<DeliveryChargeRule[]>(`${BASE}/delivery-charges`).then((r) => r.data),
+
+  upsertDeliveryCharge: (pincode: string, charge: number) =>
+    api
+      .put<DeliveryChargeRule>(`${BASE}/delivery-charges/${encodeURIComponent(pincode)}`,
+        { charge } satisfies DeliveryChargeUpsertRequest)
+      .then((r) => r.data),
+
+  deleteDeliveryCharge: (pincode: string) =>
+    api
+      .delete<DeliveryChargeDeleteResponse>(`${BASE}/delivery-charges/${encodeURIComponent(pincode)}`)
       .then((r) => r.data),
 };

@@ -112,6 +112,13 @@ export type Order = {
   checkoutId: string;
   status: OrderStatus;
   items: OrderItem[];
+  /**
+   * Delivery charge values are provided by the backend (do not compute client-side).
+   * These fields are optional because older orders/backends may not include them.
+   */
+  deliveryCharge?: number;
+  deliveryChargePincode?: string;
+  itemsTotal?: number;
   totalAmount: number;
   pickupAddress: string;
   deliveryAddress: DeliveryAddress;
@@ -179,3 +186,15 @@ export type CreateManagedUserResponse = {
   status: AccountStatus;
   message: string;
 };
+
+export type DeliveryChargeRule = {
+  _id: string;
+  pincode: string;
+  charge: number;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
+export type DeliveryChargeUpsertRequest = { charge: number };
+
+export type DeliveryChargeDeleteResponse = { deletedCount: number };

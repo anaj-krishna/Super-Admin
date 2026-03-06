@@ -39,6 +39,7 @@ export default function SuperAdminAppLayout({
     { label: "My Profile", href: "/superadmin" },
     { label: "Storekeepers", href: "/superadmin/storekeepers" },
     { label: "Delivery Partners", href: "/superadmin/delivery-partners" },
+    { label: "Delivery Charges", href: "/superadmin/delivery-charges" },
   ];
 
   const isActive = (href: string) => pathname === href;
